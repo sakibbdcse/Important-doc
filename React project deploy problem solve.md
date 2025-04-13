@@ -1,8 +1,10 @@
 ### netlify
+```
 _redirects ==>  /*    /index.html   200
-
+```
 ### web site  route problem solve 
 ## react
+```
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
@@ -11,9 +13,9 @@ _redirects ==>  /*    /index.html   200
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule . /index.html [L]
 </IfModule>
-
+```
 ## Vite 
-
+```
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
@@ -32,3 +34,20 @@ _redirects ==>  /*    /index.html   200
     AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript
   </IfModule>
 </IfModule>
+```
+## .htaccess file
+```
+# Redirect all traffic to HTTPS
+RewriteEngine On
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Serve index.html for all requests (React SPA fallback)
+RewriteEngine On
+RewriteBase /
+RewriteRule ^index\.html$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]
+
+```
